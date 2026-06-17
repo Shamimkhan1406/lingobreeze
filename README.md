@@ -3,6 +3,8 @@
 A cross-platform vocabulary learning app built with **Flutter** (frontend) and **Node.js/Express** (backend). LingoBreeze lets users browse a curated word list, save vocabulary words to the cloud, and manage their personal word collection — all with offline support via local caching.
 
 ---
+# demo video
+<video controls src="demo_video (1).mp4" title="Title"></video>
 
 ## ✨ Features
 
