@@ -4,18 +4,24 @@ import '../../models/word_model.dart';
 
 class WordCard extends StatelessWidget {
   final WordModel word;
+  final VoidCallback? onDelete;
 
   const WordCard({
     super.key,
     required this.word,
+    this.onDelete,
   });
 
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 2,
       margin: const EdgeInsets.symmetric(
         horizontal: 16,
         vertical: 8,
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
       ),
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -23,20 +29,66 @@ class WordCard extends StatelessWidget {
           crossAxisAlignment:
               CrossAxisAlignment.start,
           children: [
-            Text(
-              word.word,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    word.word,
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                if (onDelete != null)
+                  IconButton(
+                    onPressed: onDelete,
+                    icon: const Icon(
+                      Icons.delete_outline,
+                    ),
+                    tooltip: 'Delete Word',
+                  ),
+              ],
             ),
-            const SizedBox(height: 10),
-            Text(
-              'Meaning: ${word.meaning}',
+
+            const SizedBox(height: 12),
+
+            Row(
+              crossAxisAlignment:
+                  CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Meaning: ',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                Expanded(
+                  child: Text(
+                    word.meaning,
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: 6),
-            Text(
-              'Translation: ${word.translation}',
+
+            const SizedBox(height: 8),
+
+            Row(
+              crossAxisAlignment:
+                  CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Translation: ',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                Expanded(
+                  child: Text(
+                    word.translation,
+                  ),
+                ),
+              ],
             ),
           ],
         ),

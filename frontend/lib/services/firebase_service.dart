@@ -48,4 +48,8 @@ class FirebaseService {
       throw Exception('Failed to fetch words');
     }
   }
+
+  Future<void> deleteWord(int id) async {
+    await _firestore.collection(collectionName).doc(id.toString()).delete();
+  }
 }

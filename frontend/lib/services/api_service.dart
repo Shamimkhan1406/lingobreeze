@@ -6,7 +6,7 @@ import '../models/word_model.dart';
 
 class ApiService {
   static const String baseUrl =
-      'http://localhost:3001';
+    'http://10.0.2.2:3001';
 
   Future<List<WordModel>> getWords() async {
     try {

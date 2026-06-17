@@ -8,8 +8,7 @@ import '../services/local_storage_service.dart';
 class VocabularyController extends ChangeNotifier {
   final ApiService _apiService = ApiService();
   final FirebaseService _firebaseService = FirebaseService();
-  final LocalStorageService _localStorageService =
-      LocalStorageService();
+  final LocalStorageService _localStorageService = LocalStorageService();
 
   List<WordModel> savedWords = [];
   List<WordModel> availableWords = [];
@@ -21,6 +20,24 @@ class VocabularyController extends ChangeNotifier {
   /// Load words from local cache first
   Future<void> loadCachedWords() async {
     savedWords = await _localStorageService.getWords();
+    notifyListeners();
+  }
+
+  //
+  Future<void> openWordPicker() async {
+    if (availableWords.isEmpty) {
+      await loadAvailableWords();
+    }
+  }
+
+  // delete word from Firebase and local storage
+  Future<void> deleteWord(WordModel word) async {
+    await _firebaseService.deleteWord(word.id);
+
+    savedWords.removeWhere((item) => item.id == word.id);
+
+    await _localStorageService.saveWords(savedWords);
+
     notifyListeners();
   }
 
@@ -72,9 +89,7 @@ class VocabularyController extends ChangeNotifier {
       filteredWords = availableWords;
     } else {
       filteredWords = availableWords.where((word) {
-        return word.word
-            .toLowerCase()
-            .contains(query.toLowerCase());
+        return word.word.toLowerCase().contains(query.toLowerCase());
       }).toList();
     }
 
