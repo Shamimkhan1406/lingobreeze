@@ -6,6 +6,8 @@ A cross-platform vocabulary learning app built with **Flutter** (frontend) and *
 # demo video
 <video controls src="demo_video (1).mp4" title="Title"></video>
 
+https://drive.google.com/file/d/1wPwmDwl8OCyf28T5Vo9dGx2sN6_t_RLd/view?usp=sharing
+
 ## ✨ Features
 
 - **Browse & Search Words** — Fetch a vocabulary list from a Node.js REST API and search through it in real time.
